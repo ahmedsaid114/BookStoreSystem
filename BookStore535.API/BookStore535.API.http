@@ -1,0 +1,61 @@
+@host = https://localhost:7278
+
+### Scalar OpenAPI document
+GET {{host}}/openapi/v1.json
+
+### Browse books with catalog filters
+GET {{host}}/api/Customer/Books?categoryId=1&page=1&pageSize=12&sortBy=title
+
+### Get book details
+GET {{host}}/api/Customer/Books/1
+
+### List categories
+GET {{host}}/api/Customer/Categories
+
+### Register account
+POST {{host}}/api/Identity/Auth/Register
+Content-Type: application/json
+
+{
+  "firstName": "Book",
+  "lastName": "Reader",
+  "email": "reader@example.com",
+  "password": "Reader-Example-123",
+  "confirmPassword": "Reader-Example-123",
+  "phoneNumber": "+201000000000",
+  "address": "Cairo"
+}
+
+### Log in
+POST {{host}}/api/Identity/Auth/Login
+Content-Type: application/json
+
+{
+  "email": "reader@example.com",
+  "password": "Reader-Example-123"
+}
+
+### Read cart
+GET {{host}}/api/Customer/Cart
+
+### Add book to cart
+POST {{host}}/api/Customer/Cart/items
+Content-Type: application/json
+
+{
+  "bookId": 1,
+  "quantity": 1
+}
+
+### Checkout (Cash on Delivery)
+POST {{host}}/api/Customer/Orders/Checkout
+Content-Type: application/json
+
+{
+  "recipientName": "Book Reader",
+  "phoneNumber": "+201000000000",
+  "addressLine": "Street 1",
+  "city": "Cairo",
+  "discountCode": null,
+  "paymentMethod": "CashOnDelivery"
+}
